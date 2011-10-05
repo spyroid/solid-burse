@@ -1,0 +1,48 @@
+.gwt-SplitLayoutPanel-HDragger {
+  background: #0477BF;
+}
+
+.appHeader {
+	background: #FFEFD9;
+	color: #242424;
+}
+
+.appMenu {
+	background: #454545;
+	color: #fff;
+}
+
+
+.appMenuItem {
+	align: center;
+	padding: 0 10px 0 10px;	
+}
+
+.appMenuItem:hover {
+	color: #454545;
+	background: #fff;
+}
+
+.headerLink {
+    	
+}
+
+.headerLink:hover {
+	cursor: pointer;
+}
+
+.appTitle {
+    font-size: 1.6em;
+    padding: 4px;
+}
+
+.buttonsHeader {
+    background-color: #0477BF;
+    vertical-align: middle;
+    padding-top: 3px;       
+}
+
+@url mainAreaBgUrl mainAreaBg; 
+.mainArea {
+	background: transparent mainAreaBgUrl repeat;
+}

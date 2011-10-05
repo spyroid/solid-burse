@@ -16,6 +16,10 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.burse.client.Burse'/>
 
+  <replace-with class="com.burse.client.ClientFactoryImpl">
+    <when-type-is class="com.burse.client.ClientFactory"/>
+  </replace-with>
+
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
 
