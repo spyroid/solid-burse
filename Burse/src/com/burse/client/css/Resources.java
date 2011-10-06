@@ -5,7 +5,6 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.CssResource.NotStrict;
 import com.google.gwt.resources.client.DataResource;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.cellview.client.CellList;
 
 public class Resources {

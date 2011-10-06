@@ -21,6 +21,7 @@
 .appMenuItem:hover {
 	color: #454545;
 	background: #fff;
+	cursor: pointer;
 }
 
 .headerLink {

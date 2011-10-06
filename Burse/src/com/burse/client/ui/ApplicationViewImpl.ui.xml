@@ -18,7 +18,7 @@
 		            </g:cell>
 		            <g:cell verticalAlignment="middle"><g:InlineLabel ui:field="username"/></g:cell>
 		            <g:cell verticalAlignment="middle"><g:InlineLabel>&nbsp;|&nbsp;</g:InlineLabel></g:cell>
-		            <g:cell verticalAlignment="middle"><g:Anchor ui:field="settings" styleName="{res.common.headerLink}">settings</g:Anchor></g:cell>
+		            <g:cell verticalAlignment="middle"><g:Anchor ui:field="settingsLink" styleName="{res.common.headerLink}">settings</g:Anchor></g:cell>
 		            <g:cell verticalAlignment="middle"><g:InlineLabel>&nbsp;|&nbsp;</g:InlineLabel></g:cell>
 		            <g:cell verticalAlignment="middle"><g:Anchor href="#logout" styleName="{res.common.headerLink}">logout</g:Anchor></g:cell>
 		        </g:HorizontalPanel>
@@ -26,10 +26,10 @@
 	      	<g:cell>
 		        <g:HorizontalPanel width="100%" spacing="1" styleName="{res.common.appMenu}">
 			   		<g:cell>
-			   			<g:InlineLabel styleName="{res.common.appMenuItem}">Feed</g:InlineLabel>
+			   			<g:InlineLabel ui:field="feedLink" styleName="{res.common.appMenuItem}">Feed</g:InlineLabel>
 			   		</g:cell>     
 			   		<g:cell>
-			   			<g:InlineLabel styleName="{res.common.appMenuItem}">Catalog</g:InlineLabel>
+			   			<g:InlineLabel ui:field="catalogLink" styleName="{res.common.appMenuItem}">Catalog</g:InlineLabel>
 			   		</g:cell>     
 			   		<g:cell width="100%">
 			   			<g:InlineLabel></g:InlineLabel>
