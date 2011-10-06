@@ -1,10 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder
   xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:fl="urn:import:com.burse.client.ui.feed"
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:with field='res' type='com.burse.client.css.Resources' />
 
-	<g:HTML><h1>Feed</h1></g:HTML>
+                <g:SplitLayoutPanel ui:field="feedSplitPanel"  width="100%" height="100%">
+                    <g:west size="250">
+                        <fl:FeedList ui:field="feedList"/>
+                    </g:west>
+                    <g:center>
+                        <g:SimplePanel><g:HTML><h1>feed info</h1></g:HTML></g:SimplePanel>
+                    </g:center>
+                </g:SplitLayoutPanel>
 
 </ui:UiBinder>
