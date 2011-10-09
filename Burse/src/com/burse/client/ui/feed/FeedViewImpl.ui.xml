@@ -11,7 +11,7 @@
                         <fl:FeedList ui:field="feedList"/>
                     </g:west>
                     <g:center>
-                        <g:SimplePanel><g:HTML><h1>feed info</h1></g:HTML></g:SimplePanel>
+                        <g:SimplePanel><g:HTML><h1></h1></g:HTML></g:SimplePanel>
                     </g:center>
                 </g:SplitLayoutPanel>
 
