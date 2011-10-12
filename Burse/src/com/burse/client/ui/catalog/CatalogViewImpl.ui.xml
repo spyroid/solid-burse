@@ -1,10 +1,19 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder
-  xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-  <ui:with field='res' type='com.burse.client.css.Resources' />
+	<ui:with field='res' type='com.burse.client.css.Resources' />
 
-	<g:HTML><h1>Catalog</h1></g:HTML>
+	<g:HTMLPanel>
+		<h1>Catalog</h1>
+		<div class="{res.common.searchFieldContainer}">
+			<g:TextBox styleName="{res.common.searchField}" ui:field="searchField"></g:TextBox>
+			<div>
+                <a href="#catalog_browse">Browse</a>
+            </div>
+		</div>
+		
+		<div ui:field="displayDiv"></div>
+	</g:HTMLPanel>
 
 </ui:UiBinder>

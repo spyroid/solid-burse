@@ -6,12 +6,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 public class CatalogViewImpl extends Composite {
-    interface CatalogViewBinder extends UiBinder<Widget, CatalogViewImpl> {
-    }
+	interface CatalogViewBinder extends UiBinder<Widget, CatalogViewImpl> {
+	}
 
-    private static CatalogViewBinder uiBinder = GWT.create(CatalogViewBinder.class);
+	private static CatalogViewBinder uiBinder = GWT
+			.create(CatalogViewBinder.class);
 
-    public CatalogViewImpl() {
-        initWidget(uiBinder.createAndBindUi(this));
-    }
+	public CatalogViewImpl() {
+		initWidget(uiBinder.createAndBindUi(this));
+	}
 }

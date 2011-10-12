@@ -43,6 +43,16 @@
     padding-top: 3px;       
 }
 
+.searchField {
+    width:100%;
+}
+
+.searchFieldContainer {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
 @url mainAreaBgUrl mainAreaBg; 
 .mainArea {
 	background: transparent mainAreaBgUrl repeat;
