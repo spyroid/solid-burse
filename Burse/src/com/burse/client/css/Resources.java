@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.DataResource;
+import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.resources.client.CssResource.NotStrict;
 import com.google.gwt.user.cellview.client.CellList;
 
@@ -40,19 +41,22 @@ public class Resources {
 	}
 
 	public interface CellWidgetResources extends CellList.Resources {
-		@Source("FeedCell.css")
+		@Source("com/burse/client/res/FeedCell.css")
 		CellWidgetStyles cellListStyle();
 	}
 
 	public interface Bundle extends ClientBundle {
 		@NotStrict
-		@Source("common.css")
+		@Source("com/burse/client/res/common.css")
 		Common common();
 
 		CellWidgetResources cellWidgetResources();
 
-		@Source("com/burse/client/css/main-area-bg.png")
+		@Source("com/burse/client/res/main-area-bg.png")
 		DataResource mainAreaBg();
+
+		@Source("com/burse/client/res/cat.html")
+		TextResource catalogPlaceHolder();
 	}
 
 	public static Bundle bundle;
@@ -68,5 +72,9 @@ public class Resources {
 
 	public static CellWidgetResources cellWidgetResources() {
 		return bundle.cellWidgetResources();
+	}
+
+	public static Bundle bundle() {
+		return bundle;
 	}
 }
