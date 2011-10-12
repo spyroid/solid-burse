@@ -1,6 +1,6 @@
 package com.burse.client.ui;
 
-import com.burse.client.ui.catalog.CatalogViewImpl;
+import com.burse.client.ui.catalog.CatalogView;
 import com.burse.client.ui.feed.FeedViewImpl;
 import com.burse.client.ui.settings.SettingsViewImpl;
 import com.google.gwt.core.client.GWT;
@@ -41,7 +41,7 @@ public class ApplicationViewImpl extends Composite implements ApplicationView {
 
     @UiHandler("catalogLink")
     void doCatalogClick(ClickEvent e){
-        changeContent(new CatalogViewImpl());
+        changeContent(new CatalogView());
     }
 
     private void changeContent(Widget w) {
