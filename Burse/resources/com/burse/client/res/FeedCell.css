@@ -23,7 +23,7 @@
 /*   background: #ffc; */
  }
 
-.cellListSelectedItem, .cellListSelectedItem .snippetCellType {
+.cellListSelectedItem, .cellListSelectedItem{
     color: white;
 }
 

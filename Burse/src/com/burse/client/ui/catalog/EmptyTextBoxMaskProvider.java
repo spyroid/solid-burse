@@ -12,53 +12,51 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class EmptyTextBoxMaskProvider implements FocusHandler, BlurHandler {
-	TextBox box;
-	String emptyText;
+    TextBox box;
 
-	boolean hasValue = false;
-	List<HandlerRegistration> handlers;
+    String emptyText;
 
-	private EmptyTextBoxMaskProvider(String emptyText, TextBox box) {
-		this.emptyText = emptyText;
-		this.box = box;
-		handlers = Arrays.asList(box.addBlurHandler(this), box
-				.addFocusHandler(this));
-		hasValue = false;
-		box.setText(emptyText);
+    boolean hasValue = false;
 
-	}
+    List<HandlerRegistration> handlers;
 
-	public static EmptyTextBoxMaskProvider register(String emptyText,
-			TextBox box) {
-		return new EmptyTextBoxMaskProvider(emptyText, box);
-	}
+    private EmptyTextBoxMaskProvider(String emptyText, TextBox box) {
+        this.emptyText = emptyText;
+        this.box = box;
+        handlers = Arrays.asList(box.addBlurHandler(this), box.addFocusHandler(this));
+        hasValue = false;
+        box.setText(emptyText);
 
-	@Override
-	public void onFocus(FocusEvent event) {
-		GWT.log("focus request");
-		if (hasValue == false) {
-			box.setText("");
-			hasValue = true;
-		}
+    }
 
-	}
+    public static EmptyTextBoxMaskProvider register(String emptyText, TextBox box) {
+        return new EmptyTextBoxMaskProvider(emptyText, box);
+    }
 
-	@Override
-	public void onBlur(BlurEvent event) {
-		GWT.log("blur request");
-		if (box.getText().isEmpty()) {
-			box.setText(emptyText);
-			hasValue = false;
-		}
-	}
+    public void onFocus(FocusEvent event) {
+        GWT.log("focus request");
+        if (hasValue == false) {
+            box.setText("");
+            hasValue = true;
+        }
 
-	public void dispose() {
-		for (HandlerRegistration reg : handlers) {
-			reg.removeHandler();
-		}
-		if (hasValue) {
-			box.setText("");
-		}
-	}
+    }
+
+    public void onBlur(BlurEvent event) {
+        GWT.log("blur request");
+        if (box.getText().isEmpty()) {
+            box.setText(emptyText);
+            hasValue = false;
+        }
+    }
+
+    public void dispose() {
+        for (HandlerRegistration reg : handlers) {
+            reg.removeHandler();
+        }
+        if (hasValue) {
+            box.setText("");
+        }
+    }
 
 }
