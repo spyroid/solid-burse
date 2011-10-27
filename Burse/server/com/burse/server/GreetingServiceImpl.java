@@ -37,4 +37,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
         }
         return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
     }
+
+	@Override
+	public String[] queryProducts(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
