@@ -3,6 +3,7 @@ package com.burse.client.ui.feed;
 import java.util.ArrayList;
 
 import com.burse.client.css.Resources;
+import com.burse.shared.FeedDto;
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;

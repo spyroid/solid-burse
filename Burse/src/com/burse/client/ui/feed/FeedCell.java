@@ -2,6 +2,7 @@ package com.burse.client.ui.feed;
 
 
 import com.burse.client.css.Resources;
+import com.burse.shared.FeedDto;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 

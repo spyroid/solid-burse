@@ -1,5 +1,6 @@
 package com.burse.client.ui.feed;
 
+import com.burse.shared.FeedDto;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

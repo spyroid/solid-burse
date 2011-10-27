@@ -1,4 +1,4 @@
-package com.burse.client.ui.feed;
+package com.burse.shared;
 
 import com.google.gwt.view.client.ProvidesKey;
 
