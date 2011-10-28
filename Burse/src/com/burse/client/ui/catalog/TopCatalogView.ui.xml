@@ -4,7 +4,7 @@
 
 	<ui:with field='res' type='com.burse.client.css.Resources' />
 
-	<g:HTMLPanel>
+	<g:HTMLPanel height="100%">
 		<h1>Catalog</h1>
 		<div class="{res.common.searchFieldContainer}">
 			<g:TextBox styleName="{res.common.searchField}" ui:field="searchField"></g:TextBox>
@@ -15,7 +15,7 @@
 			</div>
 		</div>
 
-		<div ui:field="displayDiv"></div>
+		<div ui:field="displayDiv" style="position:relative"></div>
 	</g:HTMLPanel>
 
 </ui:UiBinder>

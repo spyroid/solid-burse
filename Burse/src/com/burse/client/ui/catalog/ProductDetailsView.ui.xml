@@ -3,17 +3,43 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<g:HTMLPanel>
-		<g:Label ui:field="productName">
-			Apple MacbookPro
-		</g:Label>
-		<g:Image ui:field="productImage"></g:Image>
-		Available offers
-		<span ui:field="offers">+100500</span>
-		<br />
-		Average Price
-		<span ui:field="avgPrice">~2000$</span>
-		<br/>
-		<g:Image ui:field="trends" url="http://www.google.com/trends/viz?q=MacBook+Pro&amp;graph=weekly_img&amp;sa=N"></g:Image>
-		
+		<h3>
+			<a ui:field="manufacturer"></a>
+			<span ui:field="productName">
+				MacbookPro
+			</span>
+		</h3>
+		<table>
+			<tr>
+				<td valign="top">
+					<g:Image ui:field="productImage"></g:Image>
+				</td>
+				<td valign="top">
+					<h3>
+						Average Price:
+						<span ui:field="avgPrice">~2000$</span>
+						<br />
+						Offers to sell:
+						<a ui:field="offersSell">+100500</a>
+						<br />
+						Offers to buy:
+						<a ui:field="offersBuy">+100500</a>
+					</h3>
+
+				</td>
+				<td valign="top">
+					<h3>Price change over time</h3>
+					<g:Image ui:field="trends"
+						url="http://www.google.com/trends/viz?q=MacBook+Pro&amp;graph=weekly_img&amp;sa=N"></g:Image>
+					<h3>Popularity</h3>
+					<g:Image
+						url="http://www.google.com/trends/viz?q=iPad&amp;graph=weekly_img&amp;sa=N"></g:Image>
+					<h3>Another Stats</h3>
+					<g:Image
+						url="http://www.google.com/trends/viz?q=Spears&amp;graph=weekly_img&amp;sa=N"></g:Image>
+
+				</td>
+			</tr>
+		</table>
 	</g:HTMLPanel>
 </ui:UiBinder> 

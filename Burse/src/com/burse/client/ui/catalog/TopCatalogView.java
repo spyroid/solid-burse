@@ -10,6 +10,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -50,12 +51,14 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 	protected ProductBrowserView browserView;
 	protected ProductDetailsView productDetailsView;
 
+	private HandlerRegistration addValueChangeHandler;
+
 	public TopCatalogView() {
 		initWidget(root = uiBinder.createAndBindUi(this));
 		EmptyTextBoxMaskProvider.register("Type to Search", searchField);
 
 		showDefaultPanel();
-		History.addValueChangeHandler(this);
+
 	}
 
 	@UiHandler("searchField")
@@ -81,25 +84,25 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 		String text = Resources.bundle.catalogPlaceHolder().getText();
 		html.setHTML(text);
 		setDisplayView(html);
-		
 
 	}
 
 	protected void tryStartSearch() {
 		setDisplayView(new HTML("Searching"));
-		
+		if ("catalog:search".equals(current) == false) {
+			History.newItem("catalog:search");
+		}
 		GreetingServiceAsync greetingService = factory.greetingService();
 		greetingService.queryProducts(searchField.getText(), new AsyncCallback<String[]>() {
 
 			@Override
 			public void onSuccess(String[] result) {
 				HTML html = new HTML();
-				
+
 				for (String string : result) {
 					Element productElement = DOM.createAnchor();
 					productElement.setAttribute("href", "#catalog:product");
-					
-					
+
 					productElement.setInnerText(string);
 					html.getElement().appendChild(productElement);
 					html.getElement().appendChild(DOM.createElement("br"));
@@ -142,17 +145,19 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 			productDetailsView = new ProductDetailsView(getProductFrom(query));
 		}
 		setDisplayView(productDetailsView);
-		
+
 	}
 
 	private ProductDto getProductFrom(String query) {
 		ProductDto dto = new ProductDto();
 		dto.id = "appleMacBookPro";
-		dto.name = "Apple MacBook Pro 17";
+		dto.name = "MacBookPro";
+		dto.manufacturer = "Apple";
 		dto.avgPrice = "2000";
 		dto.sell = 100;
 		dto.buy = 20;
-		dto.image = "http://www.gadgetcage.com/wp-content/uploads/2010/05/apple_17-inch_macbook_pro-480x301.jpg";
+		dto.image = "/dimages/MacBookPro.png";
+
 		return dto;
 	}
 
@@ -165,6 +170,20 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 		}
 		root.add(widget);
 		currentView = widget;
+	}
+
+	@Override
+	protected void onAttach() {
+		super.onAttach();
+		History.newItem("catalog", true);
+		addValueChangeHandler = History.addValueChangeHandler(this);
+
+	}
+
+	@Override
+	protected void onDetach() {
+		super.onDetach();
+		addValueChangeHandler.removeHandler();
 	}
 
 }
