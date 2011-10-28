@@ -6,13 +6,20 @@
 
   <ui:with field='res' type='com.burse.client.css.Resources' />
 
-                <g:SplitLayoutPanel ui:field="feedSplitPanel"  width="100%" height="100%">
-                    <g:west size="250">
-                        <fl:FeedList ui:field="feedList"/>
-                    </g:west>
-                    <g:center>
-                        <g:SimplePanel><g:HTML><h1></h1></g:HTML></g:SimplePanel>
-                    </g:center>
-                </g:SplitLayoutPanel>
+	<g:SplitLayoutPanel ui:field="feedSplitPanel"  width="100%" height="100%">
+	    <g:west size="400">
+		 	<g:DockLayoutPanel>
+		 		<g:north size="20">
+		 			<g:HTML>2 new Items</g:HTML>
+		 		</g:north>
+		 		<g:center>
+		 			<fl:FeedList ui:field="feedList"/>
+		 		</g:center>
+		 	</g:DockLayoutPanel>
+	    </g:west>
+	    <g:center>
+	        <g:VerticalPanel ui:field="feedInfo"></g:VerticalPanel>
+	    </g:center>
+	</g:SplitLayoutPanel>
 
 </ui:UiBinder>

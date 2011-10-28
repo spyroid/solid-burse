@@ -1,145 +1,73 @@
 package com.burse.client.ui.feed;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.burse.client.css.Resources;
+import com.burse.client.ClientFactory;
+import com.burse.client.event.FeedSelectedEvent;
 import com.burse.shared.FeedDto;
-import com.google.gwt.event.dom.client.ScrollEvent;
-import com.google.gwt.event.dom.client.ScrollHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.cellview.client.AbstractPager;
-import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.HasRows;
-import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.SelectionChangeEvent.Handler;
-import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class FeedList extends AbstractPager {
+public class FeedList extends ScrollPanel {
 
-	private static final int DEFAULT_INCREMENT = 20;
-	private int incrementSize = DEFAULT_INCREMENT;
-	private int lastScrollPos = 0;
-	private final SingleSelectionModel<FeedDto> listSelectionModel = new SingleSelectionModel<FeedDto>(FeedDto.KEY_PROVIDER);
-	private ListDataProvider<FeedDto> dataProvider = new ListDataProvider<FeedDto>();
-	private CellList<FeedDto> cellList = null;
-
-	/**
-	 * The scrollable panel.
-	 */
-	private final ScrollPanel scrollable = new ScrollPanel();
-	private HandlerRegistration selectionHandler = null;
-
-	/**
-	 * Construct a new {@link FlexibleSnippetsPanel}.
-	 */
-	public FeedList() {
-		initWidget(scrollable);
-
-		FeedCell feedCell = new FeedCell();
-		cellList = new CellList<FeedDto>(feedCell, Resources.cellWidgetResources(), FeedDto.KEY_PROVIDER);
-		cellList.setPageSize(30);
-
-		// Add a selection model so we can select cells.
-		cellList.setSelectionModel(listSelectionModel);
-
-		dataProvider.addDataDisplay(cellList);
-		setDisplay(cellList);
-
-		// Do not let the scrollable take tab focus.
-		scrollable.getElement().setTabIndex(-1);
-
-		// Handle scroll events.
-		scrollable.addScrollHandler(new ScrollHandler() {
-			public void onScroll(ScrollEvent event) {
-				// If scrolling up, ignore the event.
-				int oldScrollPos = lastScrollPos;
-				lastScrollPos = scrollable.getVerticalScrollPosition();
-				if (oldScrollPos >= lastScrollPos) {
-					return;
-				}
-
-				HasRows display = getDisplay();
-				if (display == null) {
-					return;
-				}
-				int maxScrollTop = scrollable.getWidget().getOffsetHeight() - scrollable.getOffsetHeight();
-				if (lastScrollPos >= maxScrollTop) {
-					// We are near the end, so increase the page size.
-					int newPageSize = Math.min(display.getVisibleRange().getLength() + incrementSize, display.getRowCount());
-					display.setVisibleRange(0, newPageSize);
-				}
+	private VerticalPanel container = new VerticalPanel();
+	private Map<Integer, FeedCell> feedMap = new HashMap<Integer, FeedCell>(); 
+	private FeedCell selectedCell = null;
+	private ClientFactory clientFactory = GWT.create(ClientFactory.class);
+	
+    public FeedList() {
+    	container.setWidth("100%");
+    	container.setHeight("100%");
+    	add(container);
+    	addDomHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				selectItem(event);
 			}
-		});
-	}
+		}, ClickEvent.getType());
+    }
 
-	/**
-	 * Get the number of rows by which the range is increased when the scrollbar
-	 * reaches the bottom.
-	 * 
-	 * @return the increment size
-	 */
-	public int getIncrementSize() {
-		return incrementSize;
-	}
-
-	@Override
-	public void setDisplay(HasRows display) {
-		assert display instanceof Widget : "display must extend Widget";
-		scrollable.setWidget((Widget) display);
-		super.setDisplay(display);
-	}
-
-	public void setIncrementSize(int incrementSize) {
-		this.incrementSize = incrementSize;
-	}
-
-	@Override
-	protected void onRangeOrRowCountChanged() {
-	}
-
-	public void updateSnippetsList(final ArrayList<FeedDto> result) {
-		deselectAll();
-		dataProvider.getList().clear();
-		dataProvider.getList().addAll(result);
-	}
-
-	public void addSelectionHandler(Handler handler) {
-		if (selectionHandler != null) {
-			selectionHandler.removeHandler();
-		}
-		selectionHandler = listSelectionModel.addSelectionChangeHandler(handler);
-	}
-
-	public boolean selectItem(int id) {
-		FeedDto dto = null;
-		for (int i = 0; i < dataProvider.getList().size(); i++) {
-			FeedDto t = dataProvider.getList().get(i);
-			if (t != null && t.getId() == id) {
-				dto = t;
-				break;
-			}
-		}
-		if (dto != null) {
-			listSelectionModel.setSelected(dto, true);
-		}
-		return dto != null;
-	}
-
-	public void deselectAll() {
-		FeedDto dto = listSelectionModel.getSelectedObject();
-		if (dto == null) {
+	protected void selectItem(ClickEvent e) {
+		Element targetElement = e.getNativeEvent().getEventTarget().cast();
+		FeedCell cell = getClickedFeedCell(targetElement);
+		if (cell == null) {
 			return;
 		}
-		listSelectionModel.setSelected(dto, false);
+		if (targetElement.getClassName().contains(FeedCell.getDefaultResources().feedListStyle().starButton())) {
+			cell.toggleStar();
+		} else {
+			if (selectedCell != null) {
+				selectedCell.deselect();
+			}
+			cell.select();
+			selectedCell = cell;
+			clientFactory.getEventBus().fireEvent(new FeedSelectedEvent(cell.getDto()));
+		}
 	}
 
-	public void addFeedOnTop(FeedDto FeedDto) {
-		dataProvider.getList().add(0, FeedDto);
+	private FeedCell getClickedFeedCell(Element targetElement) {
+		while (!targetElement.getClassName().contains(FeedCell.getDefaultResources().feedListStyle().feedCell())) {
+			if (this.getElement() == targetElement) {
+				return null;
+			}
+			targetElement = targetElement.getParentElement();
+		}
+		String s = targetElement.getAttribute("idx");
+		try {
+			return feedMap.get(Integer.valueOf(s));
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	public FeedDto getSelectedFeed() {
-		return listSelectionModel.getSelectedObject();
+	public void addFeedOnTop(FeedDto feedDto) {
+		FeedCell cell = new FeedCell(feedDto);
+		feedMap.put(feedDto.getId(), cell);
+		container.add(cell);
 	}
 }
