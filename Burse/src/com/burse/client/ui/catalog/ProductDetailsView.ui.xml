@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:HTMLPanel>
+		<g:Label ui:field="productName">
+			Apple MacbookPro
+		</g:Label>
+		<g:Image ui:field="productImage"></g:Image>
+		Available offers
+		<span ui:field="offers">+100500</span>
+		<br />
+		Average Price
+		<span ui:field="avgPrice">~2000$</span>
+		<br/>
+		<g:Image ui:field="trends" url="http://www.google.com/trends/viz?q=MacBook+Pro&amp;graph=weekly_img&amp;sa=N"></g:Image>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

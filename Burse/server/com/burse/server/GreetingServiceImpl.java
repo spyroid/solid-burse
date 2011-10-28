@@ -40,6 +40,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	public String[] queryProducts(String query) {
 		SearchResult search = IndexEntry.search(query, entry);
 		Collection<Object> result = search.getResult();
+		if(result == null) {
+			return new String[0];
+		}
 		Object[] array = result.toArray();
 		String[] returnValue = new String[array.length];
 		System.arraycopy(array, 0, returnValue, 0, array.length);

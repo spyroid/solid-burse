@@ -9,10 +9,12 @@
 		<div class="{res.common.searchFieldContainer}">
 			<g:TextBox styleName="{res.common.searchField}" ui:field="searchField"></g:TextBox>
 			<div>
-                <a href="#catalog:browse">Browse</a>&nbsp;<a href="#catalog:advanced_search">Parameter Search</a>
-            </div>
+				<g:Anchor href="#catalog:browse" ui:field="browseAnchor">Browse</g:Anchor>&nbsp;
+				<g:Anchor href="#catalog:advanced_search" ui:field="paramSearchAnchor">Parameter
+					Search</g:Anchor>
+			</div>
 		</div>
-		
+
 		<div ui:field="displayDiv"></div>
 	</g:HTMLPanel>
 

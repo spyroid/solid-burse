@@ -6,12 +6,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SettingsViewImpl extends Composite {
-    interface SettingsViewBinder extends UiBinder<Widget, SettingsViewImpl> {
-    }
+	interface SettingsViewBinder extends UiBinder<Widget, SettingsViewImpl> {
+	}
 
-    private static SettingsViewBinder uiBinder = GWT.create(SettingsViewBinder.class);
+	private static SettingsViewBinder uiBinder = GWT.create(SettingsViewBinder.class);
 
-    public SettingsViewImpl() {
-        initWidget(uiBinder.createAndBindUi(this));
-    }
+	public SettingsViewImpl() {
+		initWidget(uiBinder.createAndBindUi(this));
+	}
 }

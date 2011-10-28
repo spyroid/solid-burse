@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+	<div ui:field="manufactures">
+		<div><input type="checkbox"/>Apple</div>
+		<div><input type="checkbox"/>HUAINJA</div>
+		<div><input type="checkbox"/>Hewlett Packard</div>
+		<div><input type="checkbox"/>ASUS</div>
+		<div><input type="checkbox"/>ACER</div>
+		<div><input type="checkbox"/>Lenovo</div>
+		<div><input type="checkbox"/>Sony</div>
+		<div><input type="checkbox"/>IBM</div>
+		<button>Select All</button>
+	</div>
+	<g:ScrollPanel ui:field="browseArea">
+	
+	</g:ScrollPanel>
+	
+	
+	</g:HTMLPanel>
+</ui:UiBinder> 
