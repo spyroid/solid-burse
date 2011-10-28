@@ -1,5 +1,10 @@
 package com.burse.server;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.burse.server.IndexEntry.SearchResult;
 import com.burse.shared.GreetingService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -7,40 +12,43 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
+public class GreetingServiceImpl extends RemoteServiceServlet implements
+		GreetingService {
 
-    public String greetServer(String input) throws IllegalArgumentException {
+	private static IndexEntry entry;
 
-        String serverInfo = getServletContext().getServerInfo();
-        String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+	static {
 
-        // Escape data from the client to avoid cross-site script
-        // vulnerabilities.
-        input = escapeHtml(input);
-        userAgent = escapeHtml(userAgent);
+		Map<String, Object> map = new HashMap<String, Object>();
+		add(map, "Apple MacBook Air 11\" i5 ");
+		add(map, "Apple MacBook Air 13\" i5 ");
+		add(map, "Apple MacBook Pro 13\" i5");
+		add(map, "Apple MacBook Pro 15\" i5");
+		add(map, "Apple MacBook Pro 17\" i7");
+		add(map, "Hewlett Packard ProBook 15\" i5 4GB");
+		add(map, "Lenovo ThinkPad 15\"i7 8GB ");
+		add(map, "SONY VAIO 13\" 6GB");
+		add(map, "ASUS U35 11\" 8GB");
+		entry = IndexEntry.buildIndex(map);
+	}
 
-        return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br>"
-                + userAgent;
-    }
-
-    /**
-     * Escape an html string. Escaping data received from the client helps to
-     * prevent cross-site script vulnerabilities.
-     * 
-     * @param html
-     *            the html string to escape
-     * @return the escaped string
-     */
-    private String escapeHtml(String html) {
-        if (html == null) {
-            return null;
-        }
-        return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-    }
+	public String greetServer(String input) throws IllegalArgumentException {
+		return "";
+	}
 
 	@Override
 	public String[] queryProducts(String query) {
-		// TODO Auto-generated method stub
-		return null;
+		SearchResult search = IndexEntry.search(query, entry);
+		Collection<Object> result = search.getResult();
+		Object[] array = result.toArray();
+		String[] returnValue = new String[array.length];
+		System.arraycopy(array, 0, returnValue, 0, array.length);
+	
+		return returnValue;
 	}
+
+	public static void add(Map<String, Object> map, String value) {
+		map.put(value, value);
+	}
+
 }

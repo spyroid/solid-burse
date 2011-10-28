@@ -9,7 +9,7 @@
 		<div class="{res.common.searchFieldContainer}">
 			<g:TextBox styleName="{res.common.searchField}" ui:field="searchField"></g:TextBox>
 			<div>
-                <a href="#catalog:browse">Browse</a>&nbsp;<a href="#catalog:advanced_search">Advanced search</a>
+                <a href="#catalog:browse">Browse</a>&nbsp;<a href="#catalog:advanced_search">Parameter Search</a>
             </div>
 		</div>
 		
