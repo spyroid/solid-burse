@@ -33,6 +33,7 @@ public class EmptyTextBoxMaskProvider implements FocusHandler, BlurHandler {
 		return new EmptyTextBoxMaskProvider(emptyText, box);
 	}
 
+	@Override
 	public void onFocus(FocusEvent event) {
 		GWT.log("focus request");
 		if (hasValue == false) {
@@ -42,6 +43,7 @@ public class EmptyTextBoxMaskProvider implements FocusHandler, BlurHandler {
 
 	}
 
+	@Override
 	public void onBlur(BlurEvent event) {
 		GWT.log("blur request");
 		if (box.getText().isEmpty()) {

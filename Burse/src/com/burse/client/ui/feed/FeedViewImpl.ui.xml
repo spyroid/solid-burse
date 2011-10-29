@@ -7,10 +7,10 @@
   <ui:with field='res' type='com.burse.client.css.Resources' />
 
 	<g:SplitLayoutPanel ui:field="feedSplitPanel"  width="100%" height="100%">
-	    <g:west size="400">
+	    <g:west size="500">
 		 	<g:DockLayoutPanel>
-		 		<g:north size="20">
-		 			<g:HTML>2 new Items</g:HTML>
+		 		<g:north size="30">
+		 			<g:HTML horizontalAlignment="center"><a href="">2 new items</a></g:HTML>
 		 		</g:north>
 		 		<g:center>
 		 			<fl:FeedList ui:field="feedList"/>
@@ -18,7 +18,7 @@
 		 	</g:DockLayoutPanel>
 	    </g:west>
 	    <g:center>
-	        <g:VerticalPanel ui:field="feedInfo"></g:VerticalPanel>
+	        <fl:FeedInfo ui:field="feedInfo"></fl:FeedInfo>
 	    </g:center>
 	</g:SplitLayoutPanel>
 

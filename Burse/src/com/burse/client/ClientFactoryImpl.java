@@ -13,10 +13,12 @@ public class ClientFactoryImpl implements ClientFactory {
 	private static final ApplicationView applicationView = new ApplicationViewImpl();
 	private static final GreetingServiceAsync service = GWT.create(GreetingService.class);
 
+	@Override
 	public ApplicationView getApplicationView() {
 		return applicationView;
 	}
 
+	@Override
 	public EventBus getEventBus() {
 		return eventBus;
 	}

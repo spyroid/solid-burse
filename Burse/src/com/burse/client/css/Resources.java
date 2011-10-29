@@ -40,17 +40,10 @@ public class Resources {
 		String searchFieldContainer();
 	}
 
-	public interface CellWidgetResources extends CellList.Resources {
-		@Source("com/burse/client/res/FeedCell.css")
-		CellWidgetStyles cellListStyle();
-	}
-
 	public interface Bundle extends ClientBundle {
 		@NotStrict
 		@Source("com/burse/client/res/common.css")
 		Common common();
-
-		CellWidgetResources cellWidgetResources();
 
 		@Source("com/burse/client/res/main-area-bg.png")
 		DataResource mainAreaBg();
@@ -68,10 +61,6 @@ public class Resources {
 
 	public static Common common() {
 		return bundle.common();
-	}
-
-	public static CellWidgetResources cellWidgetResources() {
-		return bundle.cellWidgetResources();
 	}
 
 	public static Bundle bundle() {

@@ -2,7 +2,6 @@ package com.burse.server;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;

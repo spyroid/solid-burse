@@ -25,7 +25,7 @@ public class FeedList extends ScrollPanel {
     	container.setHeight("100%");
     	add(container);
     	addDomHandler(new ClickHandler() {
-			@Override
+    	    @Override
 			public void onClick(ClickEvent event) {
 				selectItem(event);
 			}

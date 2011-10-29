@@ -4,6 +4,7 @@ import com.burse.shared.FeedDto;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Widget;
@@ -25,7 +26,10 @@ public class FeedCell extends Widget {
 		String starButton();
 		String active();
 		String inactive();
-		String selected();
+		String feedCellSelected();
+        String title();
+        String company();
+        String companyName();
 	}
 
 	private static Resources DEFAULT_RESOURCES;
@@ -46,6 +50,7 @@ public class FeedCell extends Widget {
 	private DivElement second = Document.get().createDivElement();
 	private DivElement title = Document.get().createDivElement();
 	private DivElement company = Document.get().createDivElement();
+    private SpanElement companyName = Document.get().createSpanElement();
 	
 	private DivElement third = Document.get().createDivElement();
 
@@ -64,8 +69,16 @@ public class FeedCell extends Widget {
 		second.appendChild(title);
 		second.addClassName(style.secondColumn());
 		title.setInnerHTML(dto.getTitle());
+		title.addClassName(style.title());
 		second.appendChild(company);
-		company.setInnerHTML("AAA sro from Prague, CZ");
+		company.addClassName(style.company());
+//		company.setInnerHTML("AAA sro from Prague, CZ");
+		company.appendChild(companyName);
+		companyName.addClassName(style.companyName());
+		companyName.setInnerHTML("AAA sro");
+		SpanElement d = Document.get().createSpanElement();
+		d.setInnerHTML("&nbsp;from Prague, CZ");
+		company.appendChild(d);
 		root.appendChild(second);
 		
 		root.appendChild(third);
@@ -73,7 +86,6 @@ public class FeedCell extends Widget {
 		third.setInnerHTML("<b>71 000&euro;</b><br/>100pct");
 		
 		style.ensureInjected();
-
 	}
 
 	public void toggleStar() {
@@ -83,11 +95,11 @@ public class FeedCell extends Widget {
 	}
 
 	public void deselect() {
-		root.removeClassName(style.selected());
+		root.removeClassName(style.feedCellSelected());
 	}
 
 	public void select() {
-		root.addClassName(style.selected());
+		root.addClassName(style.feedCellSelected());
 	}
 
 	public FeedDto getDto() {

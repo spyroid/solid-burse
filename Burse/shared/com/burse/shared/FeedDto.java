@@ -1,11 +1,11 @@
 package com.burse.shared;
 
-import com.google.gwt.view.client.ProvidesKey;
 
-public class FeedDto implements Comparable<FeedDto> {
+public class FeedDto {
 
     private int id;
     private String title;
+    private boolean favorite;
 
     public FeedDto(String title, int id) {
         setTitle(title);
@@ -28,25 +28,12 @@ public class FeedDto implements Comparable<FeedDto> {
         this.title = title;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof FeedDto) {
-            return getId() == ((FeedDto) o).getId();
-        }
-        return false;
+    public boolean isFavorite() {
+        return favorite;
     }
 
-    /**
-     * The key provider that provides the unique ID of a contact.
-     */
-    public static final ProvidesKey<FeedDto> KEY_PROVIDER = new ProvidesKey<FeedDto>() {
-        public Object getKey(FeedDto item) {
-            return item == null ? null : item.getId();
-        }
-    };
-
-    public int compareTo(FeedDto o) {
-        return (o == null || o.title == null) ? -1 : -o.title.compareTo(title);
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
+
 }

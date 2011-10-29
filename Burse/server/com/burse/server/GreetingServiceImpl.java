@@ -32,6 +32,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		entry = IndexEntry.buildIndex(map);
 	}
 
+	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
 		return "";
 	}

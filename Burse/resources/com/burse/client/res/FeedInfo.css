@@ -1,0 +1,19 @@
+.feedInfo {
+	padding: 10px 10px 10px 10px;
+	font-size: 1.2em;
+}
+
+.title {
+	font-weight: bold;
+	
+}
+
+.dataBlock {
+	margin-top: 20px;
+	
+}
+
+.dataBlock td {
+	padding: 5px 10px 5px 0px;
+	font-size: 0.9em;
+}
