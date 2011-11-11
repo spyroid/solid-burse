@@ -1,4 +1,4 @@
-package com.burse.server;
+package com.burse.server.domain;
 
 import java.util.List;
 

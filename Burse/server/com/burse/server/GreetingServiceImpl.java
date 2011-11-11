@@ -10,7 +10,9 @@ import java.util.Random;
 
 import com.burse.server.IndexEntry.SearchResult;
 import com.burse.server.domain.Offer;
+import com.burse.server.domain.OffersDAO;
 import com.burse.server.domain.Product;
+import com.burse.server.domain.ProductDAO;
 import com.burse.shared.FeedDto;
 import com.burse.shared.GreetingService;
 import com.burse.shared.ProductDto;
@@ -42,8 +44,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		
 		
 		
-		ProductService service = new ProductService();
-		OffersService offersService = new OffersService();
+		ProductDAO service = new ProductDAO();
+		OffersDAO offersService = new OffersDAO();
 		Random random = new Random();
 		List<Product> list = service.list();
 		for(Product product:list) {
@@ -83,8 +85,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public ArrayList<FeedDto> listFeeds() {
-		ProductService productService = new ProductService();
-		OffersService offersService = new OffersService();
+		ProductDAO productService = new ProductDAO();
+		OffersDAO offersService = new OffersDAO();
 		List<Offer> listOffers = offersService.list();
 		ArrayList<FeedDto> feeds = new ArrayList<FeedDto>(listOffers.size());
 		for (Offer offer : listOffers) {

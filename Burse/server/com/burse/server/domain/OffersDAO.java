@@ -1,13 +1,12 @@
-package com.burse.server;
+package com.burse.server.domain;
 
 
-import com.burse.server.domain.Offer;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class OffersService extends AbstractDAO<Offer, Long>{
+public class OffersDAO extends AbstractDAO<Offer, Long>{
 
-	protected OffersService() {
+	protected OffersDAO() {
 		super(Offer.class);
 	}
 

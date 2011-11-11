@@ -1,27 +1,24 @@
-package com.burse.server;
+package com.burse.server.domain;
 
-import java.util.List;
 
-import com.burse.server.domain.Offer;
-import com.burse.server.domain.Product;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultIterable;
 import com.google.appengine.api.datastore.QueryResultIterator;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class ProductService extends AbstractDAO<Product, Long>{
+public class ProductDAO extends AbstractDAO<Product, Long>{
 
-	protected OffersService offerService;
+	protected OffersDAO offerService;
 	static {
 		
 		ObjectifyService.register(Product.class);
 		
 	}
 
-	public ProductService() {
+	public ProductDAO() {
 		super(Product.class);
-		offerService = new OffersService();
+		offerService = new OffersDAO();
 		refreshProductOffersCount(null, 0, 100);
 	}
 	
