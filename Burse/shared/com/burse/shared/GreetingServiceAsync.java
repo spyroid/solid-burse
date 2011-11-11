@@ -14,6 +14,4 @@ public interface GreetingServiceAsync {
 	void queryProducts(String query, AsyncCallback<ProductDto[]> callback);
 
 	void listFeeds(AsyncCallback<ArrayList<FeedDto>> callback);
-
-	void sendFeed(FeedDto dto, AsyncCallback<Void> callback);
 }

@@ -2,13 +2,8 @@ package com.burse.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
-import com.burse.server.IndexEntry.SearchResult;
 import com.burse.server.domain.Offer;
 import com.burse.server.domain.OffersDAO;
 import com.burse.server.domain.Product;
@@ -50,9 +45,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		return returnValue;
 	}
 
-	public static void add(Map<String, Object> map, String value) {
-		map.put(value, value);
-	}
 
 	@Override
 	public ArrayList<FeedDto> listFeeds() {
@@ -66,10 +58,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		return feeds;
 	}
 
-	@Override
-	public void sendFeed(FeedDto dto) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

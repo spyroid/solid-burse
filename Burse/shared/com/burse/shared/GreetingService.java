@@ -14,5 +14,4 @@ public interface GreetingService extends RemoteService {
 	ProductDto[] queryProducts(String query);
 	ArrayList<FeedDto> listFeeds();
 	
-	void sendFeed(FeedDto dto);
 }
