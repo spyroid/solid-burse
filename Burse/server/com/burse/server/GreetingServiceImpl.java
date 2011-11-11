@@ -17,7 +17,6 @@ import com.burse.shared.FeedDto;
 import com.burse.shared.GreetingService;
 import com.burse.shared.ProductDto;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.objectify.Key;
 
 /**
  * The server side implementation of the RPC service.
@@ -26,39 +25,8 @@ import com.googlecode.objectify.Key;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	private static IndexEntry entry;
-
-	static {
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		add(map, "Apple MacBook Air 11\" i5 ");
-		add(map, "Apple MacBook Air 13\" i5 ");
-		add(map, "Apple MacBook Pro 13\" i5");
-		add(map, "Apple MacBook Pro 15\" i5");
-		add(map, "Apple MacBook Pro 17\" i7");
-		add(map, "Hewlett Packard ProBook 15\" i5 4GB");
-		add(map, "Lenovo ThinkPad 15\"i7 8GB ");
-		add(map, "SONY VAIO 13\" 6GB");
-		add(map, "ASUS U35 11\" 8GB");
-		
-		
-		
-		
-		ProductDAO service = new ProductDAO();
-		OffersDAO offersService = new OffersDAO();
-		Random random = new Random();
-		List<Product> list = service.list();
-		for(Product product:list) {
-			Offer offer = new Offer();
-			offer.dateAdded = new Date();
-			offer.productOffered = Key.create(Product.class,product.id);
-			offer.unitPrice = random.nextInt(400) + 500;
-			offer.quantity = 500;
-			offersService.save(offer);
-			add(map,product.name);
-		}
-		entry = IndexEntry.buildIndex(map);
-	}
+	private ProductDAO productsDao = new ProductDAO();
+	private OffersDAO offersDao = new OffersDAO();
 
 	@Override
 	public String greetServer(String input) throws IllegalArgumentException {
@@ -67,14 +35,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public ProductDto[] queryProducts(String query) {
-		SearchResult search = IndexEntry.search(query, entry);
-		Collection<Object> result = search.getResult();
-		if(result == null) {
-			return new ProductDto[0];
+		Collection<Product> list = productsDao.search(query);
+		ProductDto[] returnValue = new ProductDto[list.size()];
+		int counter = 0;
+		for (Product product : list) {
+			
+			ProductDto productDto = new ProductDto();
+			productDto.id = product.id.toString();
+			productDto.name = product.name;
+			returnValue[counter++] = productDto;
+			
 		}
-		Object[] array = result.toArray();
-		ProductDto[] returnValue = new ProductDto[array.length];
-		System.arraycopy(array, 0, returnValue, 0, array.length);
 	
 		return returnValue;
 	}
@@ -85,19 +56,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public ArrayList<FeedDto> listFeeds() {
-		ProductDAO productService = new ProductDAO();
-		OffersDAO offersService = new OffersDAO();
-		List<Offer> listOffers = offersService.list();
+		List<Offer> listOffers = offersDao.list();
 		ArrayList<FeedDto> feeds = new ArrayList<FeedDto>(listOffers.size());
 		for (Offer offer : listOffers) {
-			Product product = productService.getProduct(offer.productOffered);
-			
+			Product product = productsDao.getProduct(offer.productOffered);
 			FeedDto feedDto = new FeedDto(product.name, offer.id.intValue());
 			feeds.add(feedDto);
-			
 		}
-		
-		
 		return feeds;
 	}
 

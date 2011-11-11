@@ -1,2 +1,0 @@
-serviceClass: com.burse.shared.GreetingService
-path: 82C22333867140550B5A79C4333DE08D.gwt.rpc
