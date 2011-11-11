@@ -6,7 +6,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 public class OffersDAO extends AbstractDAO<Offer, Long>{
 
-	protected OffersDAO() {
+	public OffersDAO() {
 		super(Offer.class);
 	}
 
