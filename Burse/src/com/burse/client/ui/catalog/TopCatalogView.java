@@ -93,17 +93,17 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 			History.newItem("catalog:search");
 		}
 		GreetingServiceAsync greetingService = factory.greetingService();
-		greetingService.queryProducts(searchField.getText(), new AsyncCallback<String[]>() {
+		greetingService.queryProducts(searchField.getText(), new AsyncCallback<ProductDto[]>() {
 
 			@Override
-			public void onSuccess(String[] result) {
+			public void onSuccess(ProductDto[] result) {
 				HTML html = new HTML();
 
-				for (String string : result) {
+				for (ProductDto string : result) {
 					Element productElement = DOM.createAnchor();
 					productElement.setAttribute("href", "#catalog:product");
 
-					productElement.setInnerText(string);
+					productElement.setInnerText(string.name);
 					html.getElement().appendChild(productElement);
 					html.getElement().appendChild(DOM.createElement("br"));
 				}

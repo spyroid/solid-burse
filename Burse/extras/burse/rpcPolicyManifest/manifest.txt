@@ -1,0 +1,3 @@
+# Module burse
+# RPC service class, partial path of RPC policy file
+com.burse.shared.GreetingService, 82C22333867140550B5A79C4333DE08D.gwt.rpc

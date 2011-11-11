@@ -1,11 +1,25 @@
 package com.burse.shared;
 
+import java.io.Serializable;
 
-public class FeedDto {
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-    private int id;
+
+public class FeedDto implements IsSerializable,Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
     private String title;
     private boolean favorite;
+    
+    
+    public FeedDto() {
+    	
+    }
+    
 
     public FeedDto(String title, int id) {
         setTitle(title);
