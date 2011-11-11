@@ -9,7 +9,7 @@ import com.burse.server.domain.OffersDAO;
 import com.burse.server.domain.Product;
 import com.burse.server.domain.ProductDAO;
 import com.burse.shared.FeedDto;
-import com.burse.shared.GreetingService;
+import com.burse.shared.CatalogService;
 import com.burse.shared.ProductDto;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -17,8 +17,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-		GreetingService {
+public class CatalogServiceImpl extends RemoteServiceServlet implements
+		CatalogService {
 
 	private ProductDAO productsDao = new ProductDAO();
 	private OffersDAO offersDao = new OffersDAO();

@@ -1,7 +1,7 @@
 package com.burse.client;
 
 import com.burse.client.ui.ApplicationView;
-import com.burse.shared.GreetingServiceAsync;
+import com.burse.shared.CatalogServiceAsync;
 import com.google.web.bindery.event.shared.EventBus;
 
 public interface ClientFactory {
@@ -9,5 +9,5 @@ public interface ClientFactory {
 
 	ApplicationView getApplicationView();
 
-	GreetingServiceAsync greetingService();
+	CatalogServiceAsync greetingService();
 }

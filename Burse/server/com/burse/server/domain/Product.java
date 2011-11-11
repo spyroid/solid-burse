@@ -6,6 +6,7 @@ public class Product {
 	@Id public Long id;
 	public String name;
 	public int offersCount;
+	public double averagePrice;
 	
 
 }

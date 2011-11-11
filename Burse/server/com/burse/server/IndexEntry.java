@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.googlecode.objectify.annotation.Serialized;
+
 /**
  * 
  */
@@ -20,7 +22,7 @@ public class IndexEntry implements Serializable {
 	 */
 	private static final long serialVersionUID = 5034219662146870602L;
 	char character;
-	Map<Character, IndexEntry> child = new TreeMap<Character, IndexEntry>();
+	@Serialized Map<Character, IndexEntry> child = new TreeMap<Character, IndexEntry>();
 	List<Object> avistring = new ArrayList<Object>();
 	public static final SearchResult EMPTY = new SearchResult();
 

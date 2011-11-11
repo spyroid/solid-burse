@@ -2,7 +2,7 @@ package com.burse.client.ui.catalog;
 
 import com.burse.client.ClientFactory;
 import com.burse.client.css.Resources;
-import com.burse.shared.GreetingServiceAsync;
+import com.burse.shared.CatalogServiceAsync;
 import com.burse.shared.ProductDto;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -92,7 +92,7 @@ public class TopCatalogView extends Composite implements ValueChangeHandler<Stri
 		if ("catalog:search".equals(current) == false) {
 			History.newItem("catalog:search");
 		}
-		GreetingServiceAsync greetingService = factory.greetingService();
+		CatalogServiceAsync greetingService = factory.greetingService();
 		greetingService.queryProducts(searchField.getText(), new AsyncCallback<ProductDto[]>() {
 
 			@Override
