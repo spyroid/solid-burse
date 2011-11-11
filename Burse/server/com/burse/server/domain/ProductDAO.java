@@ -13,6 +13,7 @@ import com.burse.server.IndexEntry.SearchResult;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.QueryResultIterable;
 import com.google.appengine.api.datastore.QueryResultIterator;
+import com.google.appengine.api.memcache.AsyncMemcacheService;
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheService.SetPolicy;
@@ -26,6 +27,7 @@ public class ProductDAO extends AbstractDAO<Product, Long> {
 
 	protected OffersDAO offerService;
 	protected MemcacheService mc;
+	protected AsyncMemcacheService amc;
 	public static String INDEX_MC_KEY = "PRODUCT_KEYWORD_SEARCH_INDEX";
 	static {
 
@@ -39,6 +41,7 @@ public class ProductDAO extends AbstractDAO<Product, Long> {
 		offerService = new OffersDAO();
 		refreshProductOffersCount(null, 0, 100);
 		mc = MemcacheServiceFactory.getMemcacheService();
+		amc = MemcacheServiceFactory.getAsyncMemcacheService();
 		rebuildSearchIndex();
 	}
 
@@ -54,7 +57,7 @@ public class ProductDAO extends AbstractDAO<Product, Long> {
 			keyWordMap.put(product.name, getKey(product));
 		}
 		IndexEntry buildIndex = IndexEntry.buildIndex(keyWordMap);
-		mc.put(INDEX_MC_KEY, buildIndex, Expiration.byDeltaMillis(60 * 60), SetPolicy.ADD_ONLY_IF_NOT_PRESENT);
+		amc.put(INDEX_MC_KEY, buildIndex, Expiration.byDeltaMillis(60 * 60), SetPolicy.ADD_ONLY_IF_NOT_PRESENT);
 
 		ProductIndex index = new ProductIndex();
 		index.id = INDEX_MC_KEY;
@@ -67,7 +70,7 @@ public class ProductDAO extends AbstractDAO<Product, Long> {
 		IndexEntry indexEntry = (IndexEntry) mc.get(INDEX_MC_KEY);
 		if (indexEntry == null) {
 			ProductIndex productIndex = obf.get(ProductIndex.class, INDEX_MC_KEY);
-			mc.put(INDEX_MC_KEY, productIndex.index, Expiration.byDeltaSeconds(60 * 60), SetPolicy.ADD_ONLY_IF_NOT_PRESENT);
+			amc.put(INDEX_MC_KEY, productIndex.index, Expiration.byDeltaSeconds(60 * 60), SetPolicy.ADD_ONLY_IF_NOT_PRESENT);
 			indexEntry = productIndex.index;
 		}
 		SearchResult search = IndexEntry.search(query, indexEntry);
